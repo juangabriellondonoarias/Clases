@@ -12,7 +12,5 @@ class contador{
 
 contador.incrementar();
 contador.incrementar();
-contador.incrementar();
-contador.incrementar();
 
 console.log(`El valor de la cuenta es de ${contador.cuenta}`);
