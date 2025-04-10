@@ -25,14 +25,14 @@ class Bicicleta extends Vehiculo{
     }
 }
 
-let Vehiculo1 = new Carro("el peso:" + 123, "el vehiculo es:"+"carro");
+let Vehiculo1 = new Carro("el peso del vehiculo es:" + 123, "su velocidad maxima es:" + 280 + "k/h");
 console.log(Vehiculo1.peso);
 console.log(Vehiculo1.velocidadMax);
 
 console.log("--------------------------------");
 
 
-let Vehiculo2 = new Bicicleta("el peso:" + 23, "el vehiculo es:" + "bicicleta");
+let Vehiculo2 = new Bicicleta("el peso del vehiculo es:" + 20, "su velocidad maxima es:" + 60 + "k/h");
 console.log(Vehiculo2.peso);
 console.log(Vehiculo2.velocidadMax);
 

@@ -15,7 +15,8 @@ class gato extends Animal{
     }
 
 }
-const sonido= new gato(12, 'pitbull');
+
+const sonido= new gato();
 sonido.hacerSonido();
 
 
