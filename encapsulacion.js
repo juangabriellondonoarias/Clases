@@ -24,6 +24,5 @@ console.log(persona1.getNombre());
 persona1.setNombre("carlos");
 console.log(persona1.getNombre());
 
-// console.log(persona1.#nombre);
 
 
