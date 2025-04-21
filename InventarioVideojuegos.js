@@ -4,8 +4,6 @@
 
 class Admin: propiedades nombre, contraseña, email.
 	métodos: agregarVideojuego --> llama al método ingresarVideojuego de inventario.*/
-    
-
 
 class Inventario{
     #videojuegos;
@@ -43,23 +41,14 @@ class Inventario{
 let inventario = new Inventario();
 inventario.ingresarVideojuego({nombre: "Minecraft", precio: 100000, categoria: "Sandbox"});
 inventario.ingresarVideojuego({nombre: "Mario", precio: 20000, categoria: "plataforma"});
+
+console.log("Lista videojuegos");
 console.log(inventario.obtenerTodosVideojuegos());
 
-// console.log(inventario.eliminarVideojuego("Minecraft"));
-// console.log(inventario.obtenerTodosVideojuegos());
-
-console.log(inventario.actualizarVideojuego());
+inventario.actualizarVideojuego({nombre:"Mario", precio: 30000, categoria:"xbox" });
+console.log("\nDespués de actualizar 'Mario':");
 console.log(inventario.obtenerTodosVideojuegos());
 
-
-
-
-
-
-
-
-
-
-
-
-
+inventario.eliminarVideojuego("");
+console.log("\nDespués de eliminar 'Minecraft':");
+console.log(inventario.obtenerTodosVideojuegos());
