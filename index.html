@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Inventario de Videojuegos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        h1 {
+            color: #2c3e50;
+        }
+        input, button {
+            padding: 8px;
+            margin: 5px;
+        }
+        table {
+            margin-top: 20px;
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px;
+            border: 1px solid #ccc;
+        }
+        .delete-btn {
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        .delete-btn:hover {
+            background-color: darkred;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>🎮 Inventario de Videojuegos</h1>
+
+    <div>
+        <input type="number" id="id" placeholder="ID">
+        <input type="text" id="nombre" placeholder="Nombre">
+        <input type="text" id="genero" placeholder="Género">
+        <input type="number" id="precio" placeholder="Precio">
+        <button onclick="agregarJuego()">Agregar</button>
+    </div>
+
+    <div>
+        <input type="number" id="buscarId" placeholder="Buscar por ID">
+        <button onclick="buscarJuego()">Buscar</button>
+    </div>
+
+    <table id="tabla">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Género</th>
+                <th>Precio</th>
+                <th>Acción</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <script>
+        class Videojuego {
+            constructor(id, nombre, genero, precio) {
+                this.id = id;
+                this.nombre = nombre;
+                this.genero = genero;
+                this.precio = precio;
+            }
+        }
+
+        class Inventario {
+            constructor() {
+                this.videojuegos = [];
+            }
+
+            agregar(juego) {
+                const existe = this.videojuegos.some(v => v.id === juego.id);
+                if (!existe) {
+                    this.videojuegos.push(juego);
+                    return true;
+                }
+                return false;
+            }
+
+            eliminar(id) {
+                const index = this.videojuegos.findIndex(v => v.id === id);
+                if (index !== -1) {
+                    this.videojuegos.splice(index, 1);
+                    return true;
+                }
+                return false;
+            }
+
+            buscar(id) {
+                return this.videojuegos.find(v => v.id === id);
+            }
+
+            obtenerTodos() {
+                return this.videojuegos;
+            }
+        }
+
+        const inventario = new Inventario();
+
+        function agregarJuego() {
+            const id = parseInt(document.getElementById("id").value);
+            const nombre = document.getElementById("nombre").value;
+            const genero = document.getElementById("genero").value;
+            const precio = parseFloat(document.getElementById("precio").value);
+
+            if (!id || !nombre || !genero || isNaN(precio)) {
+                alert("Por favor, llena todos los campos correctamente.");
+                return;
+            }
+
+            const nuevoJuego = new Videojuego(id, nombre, genero, precio);
+            const agregado = inventario.agregar(nuevoJuego);
+
+            if (agregado) {
+                actualizarTabla();
+                limpiarCampos();
+            } else {
+                alert("Ya existe un juego con ese ID.");
+            }
+        }
+
+        function eliminarJuego(id) {
+            inventario.eliminar(id);
+            actualizarTabla();
+        }
+
+        function buscarJuego() {
+            const id = parseInt(document.getElementById("buscarId").value);
+            const juego = inventario.buscar(id);
+            if (juego) {
+                alert(`🎯 Juego encontrado:\nNombre: ${juego.nombre}\nGénero: ${juego.genero}\nPrecio: $${juego.precio}`);
+            } else {
+                alert("❌ No se encontró ningún juego con ese ID.");
+            }
+        }
+
+        function actualizarTabla() {
+            const tbody = document.querySelector("#tabla tbody");
+            tbody.innerHTML = "";
+
+            inventario.obtenerTodos().forEach(juego => {
+                const fila = document.createElement("tr");
+                fila.innerHTML = `
+                    <td>${juego.id}</td>
+                    <td>${juego.nombre}</td>
+                    <td>${juego.genero}</td>
+                    <td>$${juego.precio.toFixed(2)}</td>
+                    <td><button class="delete-btn" onclick="eliminarJuego(${juego.id})">Eliminar</button></td>
+                `;
+                tbody.appendChild(fila);
+            });
+        }
+
+        function limpiarCampos() {
+            document.getElementById("id").value = "";
+            document.getElementById("nombre").value = "";
+            document.getElementById("genero").value = "";
+            document.getElementById("precio").value = "";
+        }
+    </script>
+
+</body>
+</html>

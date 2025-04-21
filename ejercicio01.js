@@ -6,7 +6,7 @@ class persona{
     }
 
     caminar(){
-        return `${this.nombre} esta caminando`
+        return `${this.nombre} esta caminando por el parque.`
     }
 }
 
