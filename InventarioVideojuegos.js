@@ -5,50 +5,40 @@
 class Admin: propiedades nombre, contraseña, email.
 	métodos: agregarVideojuego --> llama al método ingresarVideojuego de inventario.*/
 
+
 class Inventario{
     #videojuegos;
     constructor(){
-        this.#videojuegos = []
+        this.#videojuegos = [];
     }
 
     ingresarVideojuego(nuevoVideojuego){
         this.#videojuegos.push(nuevoVideojuego);
     }
 
-        eliminarVideojuego(nombre) {
-            const index = this.#videojuegos.findIndex(vj => vj.nombre === nombre);
-            if (index !== -1) {
-                this.#videojuegos.splice(index, 1);
-            }
-        }
+    eliminarVideojuego(){
+        this.#videojuegos.splice(1 , 1);
+    }
 
-        actualizarVideojuego(nuevoVideojuego) {
-            const index = this.#videojuegos.findIndex(vj => vj.nombre === nuevoVideojuego.nombre);
-            if (index !== -1) {
-                this.#videojuegos[index] = {
-                    ...this.#videojuegos[index],
-                    ...nuevoVideojuego
-                };
-            }
-        }
-        
     obtenerTodosVideojuegos(){
         return this.#videojuegos;
     }
-    
+
+    actualizarVideojuego(){
+        this.#videojuegos.splice()
+    }
 }
 
 let inventario = new Inventario();
 inventario.ingresarVideojuego({nombre: "Minecraft", precio: 100000, categoria: "Sandbox"});
-inventario.ingresarVideojuego({nombre: "Mario", precio: 20000, categoria: "plataforma"});
-
-console.log("Lista videojuegos");
+inventario.ingresarVideojuego({nombre: "Mario", precio: 200000, categoria: "Sandbox"});
+inventario.ingresarVideojuego({nombre: "Free Fire", precio: 300000, categoria: "Garena"});
 console.log(inventario.obtenerTodosVideojuegos());
 
-inventario.actualizarVideojuego({nombre:"Mario", precio: 30000, categoria:"xbox" });
-console.log("\nDespués de actualizar 'Mario':");
-console.log(inventario.obtenerTodosVideojuegos());
+console.log("--------------------------");
 
-inventario.eliminarVideojuego("");
-console.log("\nDespués de eliminar 'Minecraft':");
+// inventario.eliminarVideojuego();
+// console.log(inventario.obtenerTodosVideojuegos());
+
+inventario.actualizarVideojuego();
 console.log(inventario.obtenerTodosVideojuegos());
